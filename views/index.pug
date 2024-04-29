@@ -1,5 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-8.text-center
+        h1.welcome-heading.mb-4 Welcome to the Task Manager
+        p This application is for creating tasks.
+        p.mb-4
+          | Name: Manish Chandrani 
+          br
+          | Email: mchandrani@hawk.iit.edu
+        a.btn.btn-primary(href='/tasks') View Tasks
