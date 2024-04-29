@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const taskRepo = require('../controllers/taskRepo');
+const { body, validationResult } = require('express-validator');
 
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
 
 /* GET all tasks*/
 router.get('/', async (req, res, next) => {
@@ -18,14 +15,28 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// Validation middleware
+const validateTask = [
+  body('title').trim().notEmpty().withMessage('Title required').escape(),
+  body('description').trim().notEmpty().withMessage('Description required').escape(),
+  body('dueDate').trim().isISO8601().withMessage('Date Required').toDate(),
+  body('completed').optional().isBoolean().toBoolean(),
+];
+
 /* GET Create task Page */
 router.get('/new', (req, res, next) => {
   res.render('new',{title: 'Create a New Task', buttonText: 'Create Task', actionURL: 'new'});
 });
 
 /* POST task details from Create Task Page */
-router.post('/new', async (req, res, next) => {
+router.post('/new', validateTask, async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render('new', { title: 'Create a New Task', buttonText: 'Create Task', actionURL: 'new', msg: errors.array() });
+      return;
+    }
+    
     const { title, description, dueDate, completed } = req.body;
     const taskData = { title, description, dueDate, completed };
     await taskRepo.createNewTask(taskData);
@@ -57,8 +68,14 @@ router.get('/:id/edit', async (req, res, next) => {
 });
 
 /* POST Updated task Details from Edit Task Page */
-router.post('/:id/edit', async (req, res, next) => {
+router.post('/:id/edit', validateTask, async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render('edit', { task: req.body, title: 'Edit Task', buttonText: 'Edit task', actionURL: 'edit', msg: errors.array() });
+      return;
+    }
+    
     const { title, description, dueDate, completed } = req.body;
     const taskId = req.params.id;
     const updatedTask = { title, description, dueDate, completed };
