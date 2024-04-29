@@ -28,6 +28,15 @@ const taskRepo = {
     return tasksList;
   },
 
+    /* Find a task by id */
+    findById: async (id) => {
+      const tasksCollection = client.db('task_database').collection('tasks');
+      const filter = { _id: new ObjectId(id) };
+      const result = await tasksCollection.findOne(filter);
+      return new Task(result._id.toString(), result.title, result.description, result.dueDate, result.completed);
+    },
+
+
   /* Creating a new task into the database */
   createNewTask: async (taskData) => {
     const newTask = { title: taskData.title, description: taskData.description, dueDate: taskData.dueDate, completed: taskData.completed };
