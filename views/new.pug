@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .container-fluid.w-75
+    .row.justify-content-center.align-items-center.my-5
+      .col-md-8
+        .card
+          .card-header.text-center.py-4
+            h2 #{title}
+          .card-body.py-4.px-5
+            //- if msg
+            //-   ul.text-danger
+            //-     each val in msg
+            //-       li.red= val.msg
+            form(action= actionURL, method="POST")
+              .mb-3
+                label(for="title").form-label Title:
+                input(type="text", name="title", id="title", class="form-control", placeholder="Enter task title")
+              .mb-3
+                label(for="description").form-label Description:
+                input(type="text", name="description", id="description", class="form-control", placeholder="Enter task description")
+              .mb-3
+                label(for="dueDate").form-label Due Date:
+                input(type="date", name="dueDate", id="dueDate", class="form-control")
+              .mb-3
+                label(for="completed").form-label Completed:
+                input(type="checkbox", name="completed", id="completed", class="form-check-input")
+              .d-grid.gap-2 
+                button(type="submit").btn.btn-primary Save Changes
+                a(href="/tasks").btn.btn-secondary Go Back
