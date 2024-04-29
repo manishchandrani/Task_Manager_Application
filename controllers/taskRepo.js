@@ -28,13 +28,13 @@ const taskRepo = {
     return tasksList;
   },
 
-    /* Find a task by id */
-    findById: async (id) => {
-      const tasksCollection = client.db('task_database').collection('tasks');
-      const filter = { _id: new ObjectId(id) };
-      const result = await tasksCollection.findOne(filter);
-      return new Task(result._id.toString(), result.title, result.description, result.dueDate, result.completed);
-    },
+  /* Find a task by id */
+  findById: async (id) => {
+    const tasksCollection = client.db('task_database').collection('tasks');
+    const filter = { _id: new ObjectId(id) };
+    const result = await tasksCollection.findOne(filter);
+    return new Task(result._id.toString(), result.title, result.description, result.dueDate, result.completed);
+  },
 
 
   /* Creating a new task into the database */
@@ -42,7 +42,31 @@ const taskRepo = {
     const newTask = { title: taskData.title, description: taskData.description, dueDate: taskData.dueDate, completed: taskData.completed };
     const tasksCollection = client.db('task_database').collection('tasks');
     const result = await tasksCollection.insertOne(newTask);
+  },
+
+  /* Update an existing task */
+  updateTask: async (id, updatedTaskData) => {
+    const tasksCollection = client.db('task_database').collection('tasks');
+    const filter = { _id: new ObjectId(id) };
+    const updateDocument = {
+      $set: {
+        title: updatedTaskData.title,
+        description: updatedTaskData.description,
+        dueDate: updatedTaskData.dueDate,
+        completed: updatedTaskData.completed
+      }
+    };
+    await tasksCollection.updateOne(filter, updateDocument);
+  },
+
+  /* Delete a task by id */
+  deleteTask: async (id) => {
+    const tasksCollection = client.db('task_database').collection('tasks');
+    const filter = { _id: new ObjectId(id) };
+    const result = await tasksCollection.deleteOne(filter);
+    return result.deletedCount;
   }
+
 };
 
 module.exports = taskRepo;
