@@ -15,3 +15,26 @@ async function connect() {
 
 connect();
 
+const taskRepo = {
+  /* Find all the available tasks */
+  findAll: async () => {
+    let tasksList = [];
+    const tasksCollection = client.db('task_database').collection('tasks');
+    const tasksDataFromDB = tasksCollection.find({});
+    for await (const data of tasksDataFromDB) {
+      const taskObj = new Task(data._id.toString(), data.title, data.description, data.dueDate, data.completed);
+      tasksList.push(taskObj);
+    }
+    return tasksList;
+  },
+
+  /* Creating a new task into the database */
+  createNewTask: async (taskData) => {
+    const newTask = { title: taskData.title, description: taskData.description, dueDate: taskData.dueDate, completed: taskData.completed };
+    const tasksCollection = client.db('task_database').collection('tasks');
+    const result = await tasksCollection.insertOne(newTask);
+  }
+};
+
+module.exports = taskRepo;
+
