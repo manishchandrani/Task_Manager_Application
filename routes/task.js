@@ -37,4 +37,18 @@ router.post('/new', async (req, res, next) => {
   }
 });
 
+/* GET Single Task View Page */
+router.get('/:id', async (req, res, next) => {
+  try {
+    const singleTaskData = await taskRepo.findById(req.params.id);
+    if (singleTaskData) {
+      res.render('singleTask', { task: singleTaskData });
+    } else {
+      res.redirect('/tasks');
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
