@@ -6,12 +6,19 @@ const { body, validationResult } = require('express-validator');
 
 /* GET all tasks*/
 router.get('/', async (req, res, next) => {
-  try {
-    const allTaskData = await taskRepo.findAll();
-    res.render('tasks', { tasks: allTaskData });
-  } catch (error) {
-    console.error("Error fetching tasks:", error);
-    res.status(500).send("Error fetching tasks");
+  if (req.isAuthenticated()) {
+    console.log(req.session);
+    console.log(req.authInfo);
+    try {
+      const allTaskData = await taskRepo.findAll();
+      const userName = req.user.name;
+      res.render('tasks', { userName: userName, tasks: allTaskData });
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+      res.status(500).send("Error fetching tasks");
+    }
+  }else{
+    res.redirect('/login');
   }
 });
 
@@ -25,7 +32,7 @@ const validateTask = [
 
 /* GET Create task Page */
 router.get('/new', (req, res, next) => {
-  res.render('new',{title: 'Create a New Task', buttonText: 'Create Task', actionURL: 'new'});
+  res.render('new', { title: 'Create a New Task', buttonText: 'Create Task', actionURL: 'new' });
 });
 
 /* POST task details from Create Task Page */
@@ -36,7 +43,7 @@ router.post('/new', validateTask, async (req, res, next) => {
       res.render('new', { title: 'Create a New Task', buttonText: 'Create Task', actionURL: 'new', msg: errors.array() });
       return;
     }
-    
+
     const { title, description, dueDate, completed } = req.body;
     const taskData = { title, description, dueDate, completed };
     await taskRepo.createNewTask(taskData);
@@ -75,7 +82,7 @@ router.post('/:id/edit', validateTask, async (req, res, next) => {
       res.render('edit', { task: req.body, title: 'Edit Task', buttonText: 'Edit task', actionURL: 'edit', msg: errors.array() });
       return;
     }
-    
+
     const { title, description, dueDate, completed } = req.body;
     const taskId = req.params.id;
     const updatedTask = { title, description, dueDate, completed };
