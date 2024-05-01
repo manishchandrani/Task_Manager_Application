@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .container-fluid
+    .row.justify-content-center.mt-5
+      .col-md-4
+        .card.shadow-sm
+          .card-body
+            h2.text-center.mb-4(style="color: #3da2c3;") Sign Up
+            form(action="/signup", method="POST")
+              .mb-3
+                label(for="name", class="form-label", style="color: #3da2c3;") Name
+                input(type="text", name="name", id="name", class="form-control", placeholder="Enter your name", style="border-color: #3da2c3;", required)
+              .mb-3
+                label(for="email", class="form-label", style="color: #3da2c3;") Email
+                input(type="email", name="email", id="email", class="form-control", placeholder="Enter your email", style="border-color: #3da2c3;", required)
+              .mb-3
+                label(for="password", class="form-label", style="color: #3da2c3;") Password
+                input(type="password", name="password", id="password", class="form-control", placeholder="Enter your password", style="border-color: #3da2c3;", required)
+              .mb-3
+                label(for="confirmPassword", class="form-label", style="color: #3da2c3;") Confirm Password
+                input(type="password", name="confirmPassword", id="confirmPassword", class="form-control", placeholder="Confirm your password", style="border-color: #3da2c3;", required)
+              if passwordError
+                p.text-danger(style="color: #ff0000;") #{passwordError}
+              button.btn.btn-primary.btn-block(type="submit", style="background-color: #3da2c3; border-color: #3da2c3;") Sign Up
