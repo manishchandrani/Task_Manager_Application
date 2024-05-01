@@ -28,6 +28,14 @@ passport.use(new LocalStrategy({
   passwordField: 'password'
 }, localAuthUser));
 
+passport.serializeUser(function(user, done){
+  done(null,user);
+});
+
+passport.deserializeUser(function(user,done){
+  done(null,user);
+});
+
 /* GET login page. */
 router.get('/login', function(req, res, next) {
   res.render('login');
