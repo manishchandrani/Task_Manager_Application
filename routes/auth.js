@@ -49,7 +49,6 @@ router.post('/login/password', [
   if (!errors.isEmpty()) {
     return res.render('login', { msg: errors.array() });
   }
-
   passport.authenticate('local', {
     successRedirect: '/tasks',
     failureRedirect: '/login',
