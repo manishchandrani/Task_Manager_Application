@@ -20,7 +20,7 @@ const validateTask = [
   body('title').trim().notEmpty().withMessage('Title required').escape(),
   body('description').trim().notEmpty().withMessage('Description required').escape(),
   body('dueDate').trim().isISO8601().withMessage('Date Required').toDate(),
-  body('completed').optional().isBoolean().toBoolean(),
+  body('completed').optional(),
 ];
 
 /* GET Create task Page */
