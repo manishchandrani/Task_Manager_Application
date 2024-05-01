@@ -58,12 +58,13 @@ router.get('/signup', function(req,res,next){
   res.render('signup');
 });
 
+/* POST signup page*/
+
 router.post('/signup', async function(req, res, next) {
   try {
     if (req.body.password !== req.body.confirmPassword) {
       return res.render('signup', { passwordError: "Passwords do not match" });
-    }
-
+    }    
     let newUser = new User({
       name: req.body.name,
       email: req.body.email,
@@ -79,7 +80,7 @@ router.post('/signup', async function(req, res, next) {
       return res.redirect('/login');
     });
   } catch (error) {
-    return next(error);
+    return res.render('signup', { error : "Please Enter Valid Email" });
   }
 });
 
