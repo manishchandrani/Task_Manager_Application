@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h1 Login 
+    form(action="/login/password" method="POST")
+        section 
+          label(for="email") Email 
+          input(type="email", name="email" , id="email")
+        section 
+          label(for="password") Password 
+          input(type="password", name="password" , id="password")
+        button(type="submit") Sign In
