@@ -46,6 +46,17 @@ npm run dev
 
 While developing the Task Manager application, I acquired invaluable insights into implementing CRUD operations using Node.js, Express, MongoDB and integrating authentication with Passport.js. This involved mastering the creation, reading, updating, and deletion of data within the MongoDB database, alongside implementing  user authentication mechanisms. This hands-on experience significantly enhanced my comprehension of data persistence, management, and user security in modern web development.
 
+## Username and Password : 
+
+username: manish@iit.edu
+password: mypassword
+
+username: john@iit.edu
+password: john
+
+username: chandrani@iit.edu
+password: chandrani
+
 
 ## Index Page:
 
