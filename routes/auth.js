@@ -1,10 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('../models/user');
-
 
 async function localAuthUser(email,password,done){
   try{
@@ -40,3 +38,19 @@ passport.deserializeUser(function(user,done){
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
+
+/*POST local login */
+router.post('/login/password', passport.authenticate('local',{
+  successRedirect: '/tasks',
+  failureRedirect: '/login',
+}));
+
+/*POST logut*/
+router.post('/logout', function(req,res,next){
+  req.logout(function(error){
+    if(error){return next(error);}
+    res.redirect('/login');
+  })
+});
+
+module.exports = router;
