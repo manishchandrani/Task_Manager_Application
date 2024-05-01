@@ -4,21 +4,14 @@ const taskRepo = require('../controllers/taskRepo');
 const { body, validationResult } = require('express-validator');
 
 
-/* GET all tasks*/
 router.get('/', async (req, res, next) => {
-  if (req.isAuthenticated()) {
-    console.log(req.session);
-    console.log(req.authInfo);
-    try {
-      const allTaskData = await taskRepo.findAll();
-      const userName = req.user.name;
-      res.render('tasks', { userName: userName, tasks: allTaskData });
-    } catch (error) {
-      console.error("Error fetching tasks:", error);
-      res.status(500).send("Error fetching tasks");
-    }
-  }else{
-    res.redirect('/login');
+  try {
+    const allTaskData = await taskRepo.findAll();
+    const userName = req.user.name;
+    res.render('tasks', { userName: userName, tasks: allTaskData });
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+    res.status(500).send("Error fetching tasks");
   }
 });
 
