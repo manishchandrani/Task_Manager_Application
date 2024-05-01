@@ -7,6 +7,10 @@ block content
         .card.shadow-sm
           .card-body
             h2.text-center.mb-4(style="color: #3da2c3;") Sign Up
+            if msg
+              ul.text-danger
+                each val in msg
+                  li.red= val.msg
             form(action="/signup", method="POST")
               .mb-3
                 if error 
@@ -15,16 +19,16 @@ block content
                     | #{error}
                 br
                 label(for="name", class="form-label", style="color: #3da2c3;") Name
-                input(type="text", name="name", id="name", class="form-control", placeholder="Enter your name", style="border-color: #3da2c3;", required)
+                input(type="text", name="name", id="name", class="form-control", placeholder="Enter your name", style="border-color: #3da2c3;")
               .mb-3                
                 label(for="email", class="form-label", style="color: #3da2c3;") Email
-                input(type="email", name="email", id="email", class="form-control", placeholder="Enter your email", style="border-color: #3da2c3;", required)
+                input(type="email", name="email", id="email", class="form-control", placeholder="Enter your email", style="border-color: #3da2c3;")
               .mb-3
                 label(for="password", class="form-label", style="color: #3da2c3;") Password
-                input(type="password", name="password", id="password", class="form-control", placeholder="Enter your password", style="border-color: #3da2c3;", required)
+                input(type="password", name="password", id="password", class="form-control", placeholder="Enter your password", style="border-color: #3da2c3;")
               .mb-3
                 label(for="confirmPassword", class="form-label", style="color: #3da2c3;") Confirm Password
-                input(type="password", name="confirmPassword", id="confirmPassword", class="form-control", placeholder="Confirm your password", style="border-color: #3da2c3;", required)
+                input(type="password", name="confirmPassword", id="confirmPassword", class="form-control", placeholder="Confirm your password", style="border-color: #3da2c3;")
               if passwordError
                 .alert.alert-danger.text-center(role='alert')
                   strong Error: 
