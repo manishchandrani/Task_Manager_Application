@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  .container-fluid.w-75
+    .row.justify-content-center.align-items-center.my-5
+      .col-md-8
+        .card.shadow-sm
+          .card-header.text-center.py-4(style="background-color: #3da2c3; color: #fff;")
+            h2 #{title}
+          .card-body.py-4.px-5
+            if msg
+              ul.text-danger
+                each val in msg
+                  li.red= val.msg
+            form(action= actionURL, method="POST")
+              .mb-3
+                label(for="title").form-label(style="color: #3da2c3;") Title:
+                input(type="text", name="title", id="title", class="form-control", value=task.title)
+              .mb-3
+                label(for="description").form-label(style="color: #3da2c3;") Description:
+                input(type="text", name="description", id="description", class="form-control", value=task.description)
+              .mb-3
+                label(for="dueDate").form-label(style="color: #3da2c3;") Due Date:
+                input(type="date", name="dueDate", id="dueDate", class="form-control", value=task.dueDate)
+              .mb-3
+                div.form-check
+                  input(type="checkbox", name="completed", id="completed", class="form-check-input", checked=task.completed)
+                  label(for="completed", style="color: #3da2c3;") Completed
+              .d-grid.gap-2
+                button(type="submit", class="btn btn-primary", style="background-color: #3da2c3; border-color: #3da2c3; color: #fff;") Save Changes
+                a(href="/tasks", class="btn btn-secondary", style="background-color: #f7931e; border-color: #f7931e; color: #fff;") Go Back
