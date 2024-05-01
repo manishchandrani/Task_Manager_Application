@@ -53,4 +53,36 @@ router.post('/logout', function(req,res,next){
   })
 });
 
+/*GET signup form */
+router.get('/signup', function(req,res,next){
+  res.render('signup');
+});
+
+router.post('/signup', async function(req, res, next) {
+  try {
+    if (req.body.password !== req.body.confirmPassword) {
+      return res.render('signup', { passwordError: "Passwords do not match" });
+    }
+
+    let newUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    let savedDoc = await newUser.save();
+
+    req.login(savedDoc, function(err) {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/login');
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+
+
 module.exports = router;
