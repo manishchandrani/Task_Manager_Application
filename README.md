@@ -75,4 +75,28 @@ While developing the Task Manager application, I acquired invaluable insights in
 ![image](https://github.com/manishchandrani/ITMD542_Lab4/assets/142928384/9ad22477-03c2-4c66-956c-8378ddde8194)
 
 
+## Edit Task:
+
+![image](https://github.com/manishchandrani/ITMD542_FP_Task_Manager/assets/142928384/06c8a7c0-5722-4f16-a67f-7a3d8eaebc35)
+
+![image](https://github.com/manishchandrani/ITMD542_FP_Task_Manager/assets/142928384/621789f0-43a5-496d-abb3-5c6f0f7847d3)
+
+## Delete Task:
+
+![image](https://github.com/manishchandrani/ITMD542_FP_Task_Manager/assets/142928384/78d10772-2e54-43a7-8ce4-2249c762995e)
+
+Task deleted 
+
+![image](https://github.com/manishchandrani/ITMD542_FP_Task_Manager/assets/142928384/b3ad1fe2-9761-4b05-9769-1220f31d2416)
+
+## Express Validation:
+
+![image](https://github.com/manishchandrani/ITMD542_FP_Task_Manager/assets/142928384/1a8cf3cb-2104-460b-8e8e-80356f2b26d3)
+
+
+
+
+
+
+
 
