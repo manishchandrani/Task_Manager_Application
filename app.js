@@ -39,8 +39,17 @@ app.use(session({
 }));
 app.use(passport.authenticate('session'));
 
+// Authentication middleware
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
+
 app.use('/', indexRouter);
-app.use('/tasks', tasksRouter);
+app.use('/tasks', isAuthenticated, tasksRouter);
 app.use('/', authRouter);
 
 // catch 404 and forward to error handler
