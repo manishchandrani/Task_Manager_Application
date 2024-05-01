@@ -7,13 +7,17 @@ block content
         .card.shadow-sm
           .card-body
             h2.text-center.mb-4(style="color: #3da2c3;") Login
+            if msg
+              ul.text-danger
+                each val in msg
+                  li.red= val.msg
             form(action="/login/password", method="POST")
               .mb-3
                 label(for="email", class="form-label", style="color: #3da2c3;") Email
-                input(type="email", name="email", id="email", class="form-control", placeholder="Enter your email", style="border-color: #3da2c3;", required)
+                input(type="email", name="email", id="email", class="form-control", placeholder="Enter your email", style="border-color: #3da2c3;")
               .mb-3
                 label(for="password", class="form-label", style="color: #3da2c3;") Password
-                input(type="password", name="password", id="password", class="form-control", placeholder="Enter your password", style="border-color: #3da2c3;", required)
+                input(type="password", name="password", id="password", class="form-control", placeholder="Enter your password", style="border-color: #3da2c3;")
               button.btn.btn-primary.btn-block(type="submit", style="background-color: #3da2c3; border-color: #3da2c3;") Sign In
             .mt-3.text-center(style="color: #3da2c3;")
               | Don't have an account? 
