@@ -1,4 +1,4 @@
-﻿# ITMD542_FP_Task_Manager
+Task_Manager
 
 ## Details
 
@@ -6,11 +6,7 @@
 
 **Email**: mchandrani@hawk.iit.edu
 
-**Class**: ITMD542 
 
-**Assignment**: Final Project
-
-**Github Repo Link**: https://github.com/manishchandrani/ITMD542_FP_Task_Manager
 
 ## Project Description:
 The Task Manager is a web application developed with Node.js, Express.js, and MongoDB, integrating Passport.js for authentication purposes. It serves as a comprehensive solution for task management, emphasizing CRUD (Create, Read, Update, Delete) operations to enhance user productivity. 
